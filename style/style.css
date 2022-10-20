@@ -13,12 +13,15 @@ body {
   width: 80%;
   height: 100vh;
   display: grid;
-  grid-template-rows: repeat(21, 1fr);
-  grid-template-columns: repeat(31, 1fr);
+  grid-template-rows: repeat(20, 1fr);
+  grid-template-columns: repeat(30, 1fr);
 }
 #game-dashboard {
   width: 15%;
 }
 .red {
-  background-color: red;
+  background-color: red !important;
+}
+.soil {
+  background-color: grey;
 }
