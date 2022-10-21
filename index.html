@@ -9,8 +9,24 @@
     <link rel="stylesheet" href="" />
     <link rel="stylesheet" href="/style/style.css" />
   </head>
-  <body>
-    <div id="game-dashboard"></div>
+  <body class="flex">
+    <div id="game-dashboard" class="game-dashboard flex">
+      <div class="tools-container">
+        <div class="item-box" id="Shovel">Shovel</div>
+        <div class="item-box" id="Axe">Axe</div>
+        <div class="item-box" id="pickaxe">pickaxe</div>
+      </div>
+      <div class="selected"></div>
+      <div class="inventroy-container"></div>
+      <div class="settings-container">
+        <div class="buttons-container">
+          <button>restart</button>
+          <button>dark mood</button>
+          <button>random world</button>
+        </div>
+        <div class="theme-container"></div>
+      </div>
+    </div>
     <div id="game-board"></div>
   </body>
   <script src="/app.js"></script>
