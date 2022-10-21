@@ -244,10 +244,11 @@ function buttonClick(e) {
     if (!game.darkMood) {
       console.log("dark mood");
       game.darkMood = true;
-      grid.style.backgroundColor = "blue";
+      grid.classList.add("dark-mood");
+      // grid.style.backgroundColor = "blue";
     } else {
       game.darkMood = false;
-      grid.style.backgroundColor = "rgb(89, 165, 228)";
+      grid.classList.remove("dark-mood");
     }
   }
   if (e.target.id == "random") {
