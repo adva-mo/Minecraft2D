@@ -3,6 +3,7 @@ const game = {
   gameState: null,
   selected: false,
   darkMood: false,
+  readyToPlant: false,
   inventory: {
     leaves: 0,
     trunk: 0,
@@ -13,7 +14,7 @@ const game = {
   miningOptions: {
     shovel: ["soil", "grass"],
     axe: ["leaves", "trunk"],
-    pickaxe: "stone",
+    pickaxe: ["stone"],
   },
 };
 
@@ -26,9 +27,10 @@ const tools = [shovel, axe, pickaxe];
 
 const soil = document.querySelector("#soil-pic");
 const leave = document.querySelector("#leaves-pic");
-const stone = document.querySelector("#stones-pic");
+const stone = document.querySelector("#stone-pic");
 const trunk = document.querySelector("#trunk-pic");
-const miningMaterial = [leave, trunk, stone, soil];
+const grass = document.querySelector("#grass-pic");
+const miningMaterial = [leave, trunk, stone, soil, grass];
 
 const gameButtons = document.querySelectorAll("button");
 
@@ -63,7 +65,7 @@ const getElementByIdF = (x, y) => {
   return document.getElementById(`(${x},${y})`);
 };
 
-const generateSoil = () => {
+const drawSoil = () => {
   soilY = randomNumAtoB(13, 18);
   for (let i = 0; i < 20 - soilY; i++) {
     for (let j = 0; j < 30; j++) {
@@ -76,7 +78,7 @@ const generateSoil = () => {
   return soilY;
 };
 
-const drawTopSoil = (soilY) => {
+const drawGrass = (soilY) => {
   let topSoil = getElementByIdF(0, soilY - 1);
   if (topSoil) {
     topSoil.classList.add("grass");
@@ -123,9 +125,9 @@ function drawTreeLeaves(trunkLen) {
   }
   return x;
 }
+
 function setStonePosition(treeXposition, soilY) {
   let x, y;
-  // console.log(treeXposition, soilY);
   if (treeXposition > 15) {
     x = randomNumAtoB(2, 10);
     y = soilY - 2;
@@ -166,101 +168,11 @@ function scanWorldToGameState() {
   }
   return gameState;
 }
-/*
-*
-// --------game play
-*
-*/
-
-function generateWorld() {
-  var soilY;
-  var trunkLen;
-  var treeXposition;
-  var stringPosition;
-  generateDivIDs();
-  soilY = generateSoil();
-  drawTopSoil(soilY);
-  trunkLen = drawTreeTrunck(soilY);
-  treeXposition = drawTreeLeaves(trunkLen);
-  stringPosition = setStonePosition(treeXposition, soilY);
-  drawStones(stringPosition);
-}
-
-generateWorld();
-game.gameState = scanWorldToGameState();
-
-/*
-*
-// --------temporary functions
-*
-*/
-function toolClick(e) {
-  // if (!game.selected) {
-  //   e.target.classList.add("selected");
-  // }
-  // game.selected = true;
-  game.currentTool = e.target.id;
-  console.log(game.currentTool);
-}
-function materialClick(e) {
-  console.log(e.target.id);
-}
-function miningClick(e) {
-  const ElementClass = e.target.getAttribute("class");
-
-  if (ElementClass) {
-    game.inventory[ElementClass] = game.inventory[ElementClass] + 1;
-    switch (ElementClass) {
-      case "stone":
-        e.target.classList.remove(ElementClass);
-        break;
-      case "leaves":
-        e.target.classList.remove(ElementClass);
-        break;
-      case "soil":
-        e.target.classList.remove(ElementClass);
-        break;
-      case "trunk":
-        e.target.classList.remove(ElementClass);
-        break;
-      case "grass":
-        e.target.classList.remove(ElementClass);
-        break;
-    }
-    updateInventry(ElementClass);
-  }
-  console.log("item add to object", game.inventory);
-}
-
-function updateInventry(ElementClass) {
-  let something = document.querySelector(`#${ElementClass}-count`);
-  something = game.inventory.ElementClass;
-}
-function buttonClick(e) {
-  if (e.target.id == "restart") {
-    console.log("restart");
-  }
-  if (e.target.id == "darkMood") {
-    if (!game.darkMood) {
-      console.log("dark mood");
-      game.darkMood = true;
-      grid.classList.add("dark-mood");
-      // grid.style.backgroundColor = "blue";
-    } else {
-      game.darkMood = false;
-      grid.classList.remove("dark-mood");
-    }
-  }
-  if (e.target.id == "random") {
-    console.log("random");
-  }
-}
 
 function addClickEvents() {
   const gridCells = grid.querySelectorAll("div");
   gridCells.forEach((cell) => {
-    cell.addEventListener("click", miningClick);
-    // cell.style.cursor = "pointer";
+    cell.addEventListener("click", gridCellClick);
   });
   tools.forEach((tool) => {
     tool.addEventListener("click", toolClick);
@@ -273,11 +185,111 @@ function addClickEvents() {
   });
 }
 
+function isdRark() {
+  if (!game.darkMood) {
+    console.log("dark mood");
+    game.darkMood = true;
+    grid.classList.add("dark-mood");
+  } else {
+    game.darkMood = false;
+    grid.classList.remove("dark-mood");
+  }
+}
+
+function gridCellClick(e) {
+  const ElementClass = e.target.getAttribute("class");
+  if (game.currentTool) {
+    console.log(`elemnet class: ${ElementClass}`);
+    if (ElementClass) {
+      miningValidation(e, ElementClass);
+    } else {
+      return;
+    }
+  } else if (game.readyToPlant) {
+    plantingValidation(); //here!!!!!
+  }
+}
+
+function miningValidation(e, ElementClass) {
+  console.log(game.currentTool);
+  let options = game.miningOptions[`${game.currentTool}`];
+  if (options.includes(`${ElementClass}`)) {
+    game.inventory[ElementClass] = game.inventory[ElementClass] + 1;
+    updateInventry(ElementClass);
+    e.target.classList.remove(ElementClass);
+    console.log("item add to inventory", game.inventory);
+  } else {
+    console.log(`you can't mine that with ${game.currentTool}!!!`);
+  }
+}
+
+/*
+*
+// --------game play
+*
+*/
+
+function generateRandomWorld() {
+  var soilY;
+  var trunkLen;
+  var treeXposition;
+  var stringPosition;
+  generateDivIDs();
+  soilY = drawSoil();
+  drawGrass(soilY);
+  trunkLen = drawTreeTrunck(soilY);
+  treeXposition = drawTreeLeaves(trunkLen);
+  stringPosition = setStonePosition(treeXposition, soilY);
+  drawStones(stringPosition);
+}
+
+generateRandomWorld();
+game.gameState = scanWorldToGameState();
+
 addClickEvents();
 
-// function addEventsToGridCells(){
-//   const allChilds = [...grid.children];
+/*
+*
+// --------temporary functions
+*
+*/
 
-function DashboardClickEvents() {}
+function toolClick(e) {
+  game.currentTool = e.target.id;
+  console.log(game.currentTool);
+}
+
+function materialClick(e) {
+  let material = e.target.id;
+  material = material.replace("-pic", "");
+  // console.log(game.inventory[material]);
+  if (game.inventory[material] <= 0) {
+    console.log("you dont have enough");
+  } else {
+    console.log("plant item selected");
+    game.currentTool = null;
+    game.readyToPlant = true;
+    plantingValidation();
+  }
+}
+
+function plantingValidation(e) {}
+
+function updateInventry(ElementClass) {
+  let something = document.querySelector(`#${ElementClass}-count`);
+  something = game.inventory.ElementClass;
+}
+
+function buttonClick(e) {
+  if (e.target.id == "restart") {
+    console.log("restart");
+  }
+  if (e.target.id == "darkMood") {
+    isdRark(game.darkMood);
+  }
+  if (e.target.id == "random") {
+    console.log("random");
+  }
+}
 
 function getNumId(stringId) {}
