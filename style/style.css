@@ -5,11 +5,11 @@ body {
   justify-content: center;
   align-items: center;
   margin: 0;
-  background-color: black;
+  background-color: rgb(0, 0, 0);
 }
 
 #game-board {
-  background-color: #ccc;
+  background-color: rgb(89, 165, 228);
   width: 80%;
   height: 100vh;
   display: grid;
@@ -20,11 +20,17 @@ body {
   width: 15%;
 }
 .red {
-  background-color: red;
+  background-color: darkred;
 }
 .soil {
-  background-color: grey;
+  background-color: rgb(195, 156, 41);
 }
 .top-soil {
-  background-color: rgb(75, 73, 73) !important;
+  background-color: rgb(105, 81, 3) !important;
+}
+.green {
+  background-color: green;
+}
+.stone {
+  background-color: grey;
 }
