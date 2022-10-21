@@ -200,6 +200,7 @@ function gridCellClick(e) {
   const ElementClass = e.target.getAttribute("class");
   if (game.currentTool) {
     console.log(`elemnet class: ${ElementClass}`);
+
     if (ElementClass) {
       miningValidation(e, ElementClass);
     } else {
@@ -214,20 +215,26 @@ function miningValidation(e, ElementClass) {
   console.log(game.currentTool);
   let options = game.miningOptions[`${game.currentTool}`];
   if (options.includes(`${ElementClass}`)) {
-    game.inventory[ElementClass] = game.inventory[ElementClass] + 1;
+    game.inventory[ElementClass] += 1;
     updateInventry(ElementClass);
     e.target.classList.remove(ElementClass);
-    console.log("item add to inventory", game.inventory);
   } else {
     console.log(`you can't mine that with ${game.currentTool}!!!`);
   }
 }
 
+function updateInventry(ElementClass) {
+  let something = document.querySelector(`#${ElementClass}-count`);
+  something.innerHTML = game.inventory[`${ElementClass}`];
+}
+
 /*
 *
-// --------game play
+// --------game starts here
 *
 */
+
+generateRandomWorld();
 
 function generateRandomWorld() {
   var soilY;
@@ -243,7 +250,6 @@ function generateRandomWorld() {
   drawStones(stringPosition);
 }
 
-generateRandomWorld();
 game.gameState = scanWorldToGameState();
 
 addClickEvents();
@@ -274,11 +280,6 @@ function materialClick(e) {
 }
 
 function plantingValidation(e) {}
-
-function updateInventry(ElementClass) {
-  let something = document.querySelector(`#${ElementClass}-count`);
-  something = game.inventory.ElementClass;
-}
 
 function buttonClick(e) {
   if (e.target.id == "restart") {
