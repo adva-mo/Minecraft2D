@@ -1,3 +1,6 @@
+const game = {
+  currentTool: "axe",
+};
 const grid = document.querySelector("#game-board");
 
 /*
@@ -25,17 +28,43 @@ const getElementByIdF = (x, y) => {
 };
 
 const generateSoil = () => {
-  let x = randomNumAtoB(13, 18);
-  for (let i = 0; i < 20 - x; i++) {
+  soilY = randomNumAtoB(13, 18);
+  for (let i = 0; i < 20 - soilY; i++) {
     for (let j = 0; j < 30; j++) {
-      let newDiv = getElementByIdF(0 + j, x + i);
+      let newDiv = getElementByIdF(0 + j, soilY + i);
       if (newDiv) {
         newDiv.classList.add("soil");
       }
     }
   }
-  console.log(x);
+  return soilY;
 };
+
+const drawTopSoil = (soilY) => {
+  let topSoil = getElementByIdF(0, soilY - 1);
+  if (topSoil) {
+    topSoil.classList.add("top-soil");
+    for (let i = 0; i <= 29; i++) {
+      topSoil = getElementByIdF(i, soilY - 1);
+      topSoil.classList.add("top-soil");
+    }
+  }
+};
+
+function drawTreeTrunck(soilY) {
+  let trunkLen = randomNumAtoB(2, 5);
+  let x = randomNumAtoB(0, 30);
+  let treeTrunk = getElementByIdF(x, soilY - 2);
+  if (treeTrunk) {
+    treeTrunk.classList.add("red");
+    for (let i = 1; i < trunkLen; i++) {
+      soilY--;
+      treeTrunk = getElementByIdF(x, soilY - 2);
+      treeTrunk.classList.add("red");
+    }
+  }
+}
+
 /*
 *
 // --------hgame play
@@ -43,39 +72,17 @@ const generateSoil = () => {
 */
 
 function generateWorld() {
+  var soilY;
   generateDivIDs();
-  generateSoil();
+  soilY = generateSoil();
+  drawTreeTrunck(soilY);
+  drawTopSoil(soilY);
 }
 
 generateWorld();
+
 /*
 *
 // --------temporary functions
 *
 */
-
-function getRandomPosition() {
-  return 5, 5;
-}
-
-function getRandomTree() {
-  //   let len = Math.floor(Math.random() * 6);
-  return 4;
-}
-// getRandomTree();
-function drawElement(y) {
-  let len = randomNumAtoB(2, 5);
-
-  let x = randomNumAtoB(0, 30);
-  let tree = document.getElementById(`(${x},${y})`);
-  console.log(tree);
-  for (let i = 0; i < len; i++) {
-    ++x;
-    tree = document.getElementById(`(${x},${y})`);
-    if (tree) {
-      tree.classList.add("red");
-    }
-  }
-}
-
-drawElement(17);

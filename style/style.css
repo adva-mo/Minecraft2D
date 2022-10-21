@@ -20,8 +20,11 @@ body {
   width: 15%;
 }
 .red {
-  background-color: red !important;
+  background-color: red;
 }
 .soil {
   background-color: grey;
+}
+.top-soil {
+  background-color: rgb(75, 73, 73) !important;
 }
