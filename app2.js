@@ -127,13 +127,12 @@ function drawTreeLeaves(trunkLen) {
 }
 
 function setStonePosition(treeXposition, soilY) {
-  let x, y;
+  let x,
+    y = soilY - 2;
   if (treeXposition > 15) {
     x = randomNumAtoB(2, 10);
-    y = soilY - 2;
   } else {
     x = randomNumAtoB(18, 26);
-    y = soilY - 2;
   }
   return `(${x},${y})`;
 }
@@ -151,6 +150,43 @@ function drawStones(stringPosition) {
     for (let j = 0; j < stoneHeight; j++) {
       stone = getElementByIdF(x + i, y - j);
       stone.classList.add("stone");
+    }
+  }
+}
+
+function setGrassPosition(treeXposition, soilY) {
+  let x, y;
+  console.log(treeXposition);
+  if (treeXposition > 15) {
+    x = randomNumAtoB(17, 26);
+    y = soilY - 2;
+  } else {
+    x = randomNumAtoB(2, 12);
+    y = soilY - 2;
+  }
+  if (x == treeXposition || x == treeXposition - 1) {
+    setGrassPosition(treeXposition, soilY);
+  } else {
+    return `(${x},${y})`;
+  }
+}
+
+function drawBigGrass(stringPosition) {
+  let stone = document.getElementById(stringPosition);
+  let stoneHeight = randomNumAtoB(2, 2);
+  if (!stone) {
+    return;
+  }
+  stone.classList.add("grass");
+  stone = stone.id;
+  stone = stone.replace("(", "");
+  stone = stone.replace(")", "");
+  let y = Number(stone.split(",")[1]);
+  let x = Number(stone.split(",")[0]);
+  for (let i = 0; i < stoneHeight; i++) {
+    for (let j = 0; j < stoneHeight; j++) {
+      stone = getElementByIdF(x + i, y - j);
+      stone.classList.add("grass");
     }
   }
 }
@@ -365,38 +401,5 @@ addClickEvents();
 // --------temporary functions
 *
 */
-function setGrassPosition(treeXposition, soilY) {
-  let x, y;
-  console.log(treeXposition);
-  if (treeXposition > 15) {
-    x = randomNumAtoB(17, 26);
-    y = soilY - 2;
-  } else {
-    x = randomNumAtoB(2, 12);
-    y = soilY - 2;
-  }
-  if (x == treeXposition || x == treeXposition - 1) {
-    setGrassPosition(treeXposition, soilY);
-  } else {
-    return `(${x},${y})`;
-  }
-}
-
-function drawBigGrass(stringPosition) {
-  let stone = document.getElementById(stringPosition);
-  let stoneHeight = randomNumAtoB(2, 2);
-  stone.classList.add("grass");
-  stone = stone.id;
-  stone = stone.replace("(", "");
-  stone = stone.replace(")", "");
-  let y = Number(stone.split(",")[1]);
-  let x = Number(stone.split(",")[0]);
-  for (let i = 0; i < stoneHeight; i++) {
-    for (let j = 0; j < stoneHeight; j++) {
-      stone = getElementByIdF(x + i, y - j);
-      stone.classList.add("grass");
-    }
-  }
-}
 
 function getNumId(stringId) {}

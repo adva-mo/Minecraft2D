@@ -44,4 +44,7 @@
     height: 2.5rem;
     border: 1px black solid;
   }
+  .settings-container button {
+    font-size: x-small;
+  }
 }

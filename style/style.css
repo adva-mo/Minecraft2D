@@ -10,6 +10,7 @@ body {
   font-size: 14px;
   /* position: relative; */
   font-family: "open-sans", "helavetica neue", ariel, sans-serif;
+  color: #f5f5f5;
 }
 #landing-page {
   width: 100vw;
@@ -21,7 +22,6 @@ body {
   justify-content: center;
   align-items: center; */
   text-align: center;
-  display: none;
 }
 #landind-page-main-box {
   margin-top: 25%;
@@ -52,13 +52,11 @@ body {
 .game-dashboard {
   width: 10rem;
   flex-direction: column;
-  /* background-color: #ccc; */
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
-  background-color: #ccc;
-
+  background-color: #555555;
   text-align: center;
-  padding: 0.5rem 0.2rem;
+  padding: 1rem 0.2rem;
   flex-shrink: 0;
 }
 
@@ -89,7 +87,8 @@ body {
 .tool-image {
   width: 2.5rem;
   height: 5rem;
-  border: 1px black solid;
+  /* border: 1px black solid; */
+  border-radius: 5px;
 }
 .tools-container {
   justify-content: space-around;
@@ -106,7 +105,7 @@ body {
 .mined-image {
   width: 2.5rem;
   height: 2.5em;
-  border: 1px black solid;
+  border: 1px #424549 solid;
   margin-top: 0.5rem;
 }
 .dark-mood {
@@ -117,21 +116,24 @@ button {
   font-size: 0.8rem;
   cursor: pointer;
 }
-button:hover {
-  outline: 0.5px solid black;
-}
 .display-none {
   display: none;
 }
 .buttons-container {
   flex-direction: column;
   gap: 0.3rem;
-  /* width: 70%; */
 }
 .selected {
-  border-color: red !important;
+  outline: #7289da 2px solid !important;
 }
-
-/* #start-play{
-
-} */
+.settings-container button {
+  background-color: #7289da;
+  border: none;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  color: #f5f5f5;
+  border-radius: 5px;
+}
+.settings-container button:hover {
+  outline: 1px solid #36393e;
+}
