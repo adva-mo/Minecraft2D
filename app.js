@@ -2,8 +2,7 @@ const game = {
   currentTool: null,
   gameState: null,
   selected: false,
-  darkMood: false,
-  readyToPlant: false,
+  readyToPlant: null,
   inventory: {
     leaves: 0,
     trunk: 0,
@@ -187,31 +186,24 @@ function addClickEvents() {
   });
 }
 
-function isdRark() {
-  if (!game.darkMood) {
-    console.log("dark mood");
-    game.darkMood = true;
-    grid.classList.add("dark-mood");
-  } else {
-    game.darkMood = false;
-    grid.classList.remove("dark-mood");
-  }
+function setDarkMood() {
+  grid.classList.toggle("dark-mood");
 }
 
-function gridCellClick(e) {
-  const ElementClass = e.target.getAttribute("class");
-  if (game.currentTool) {
-    console.log(`elemnet class: ${ElementClass}`);
+// function gridCellClick(e) {
+//   const ElementClass = e.target.getAttribute("class");
+//   if (game.currentTool) {
+//     console.log(`elemnet class: ${ElementClass}`);
 
-    if (ElementClass) {
-      miningValidation(e, ElementClass);
-    } else {
-      return;
-    }
-  } else if (game.readyToPlant) {
-    plantingValidation(); //here!!!!!
-  }
-}
+//     if (ElementClass) {
+//       miningValidation(e, ElementClass);
+//     } else {
+//       return;
+//     }
+//   } else if (game.readyToPlant) {
+//     plantingValidation(ElementClass); //here!!!!!
+//   }
+// }
 
 function miningValidation(e, ElementClass) {
   console.log(game.currentTool);
@@ -267,28 +259,68 @@ function toolClick(e) {
   console.log(game.currentTool);
 }
 
-function materialClick(e) {
-  let material = e.target.id;
-  material = material.replace("-pic", "");
-  // console.log(game.inventory[material]);
-  if (game.inventory[material] <= 0) {
-    console.log("you dont have enough");
-  } else {
-    console.log("plant item selected");
-    game.currentTool = null;
-    game.readyToPlant = true;
-    plantingValidation();
+function gridCellClick(e) {
+  const ElementClass = e.target.getAttribute("class");
+  if (game.currentTool) {
+    console.log(`elemnet class: ${ElementClass}`);
+
+    if (ElementClass) {
+      miningValidation(e, ElementClass);
+    } else {
+      return;
+    }
+  } else if (game.readyToPlant) {
+    plantingValidation(e, ElementClass); //here!!!!!
   }
 }
 
-function plantingValidation(e) {}
+function materialClick(e) {
+  let material = e.target.id;
+  material = material.replace("-pic", "");
+  // console.log(material);
+  if (game.inventory[material] <= 0) {
+    console.log("you dont have enough");
+  } else {
+    console.log("plant item selected" + material);
+    game.currentTool = null;
+    // game.readyToPlant = true;
+    game.readyToPlant = material;
+    // plantingValidation(e);
+  }
+}
+
+function plantingValidation(e) {
+  var DivBelowClass;
+  // game.readyToPlant = "trunk"
+  let plantLocation = e.target.id;
+  // console.log("planting location click ", plantLocation); //(6,13)
+  DivBelowClass = getdivBelowClass(plantLocation);
+  // console.log(DivBelowClass);
+  if (DivBelowClass) {
+    console.log("plantes sucees");
+  } else {
+    console.log("cant be on air");
+  }
+}
+
+function getdivBelowClass(plantLocation) {
+  // let divBelow;
+  plantLocation = plantLocation.replace("(", "");
+  plantLocation = plantLocation.replace(")", "");
+  let y = Number(plantLocation.split(",")[1]);
+  let x = Number(plantLocation.split(",")[0]);
+  DivBelowClass = getElementByIdF(x, y + 1);
+  let plantingLoctionClass = DivBelowClass.getAttribute("class");
+  console.log("div below class", plantingLoctionClass);
+  return plantingLoctionClass;
+}
 
 function buttonClick(e) {
   if (e.target.id == "restart") {
     console.log("restart");
   }
   if (e.target.id == "darkMood") {
-    isdRark(game.darkMood);
+    setDarkMood(game.darkMood);
   }
   if (e.target.id == "random") {
     console.log("random");
