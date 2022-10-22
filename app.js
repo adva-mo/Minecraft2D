@@ -140,14 +140,15 @@ function setStonePosition(treeXposition, soilY) {
 
 function drawStones(stringPosition) {
   let stone = document.getElementById(stringPosition);
+  let stoneHeight = randomNumAtoB(2, 3);
   stone.classList.add("stone");
   stone = stone.id;
   stone = stone.replace("(", "");
   stone = stone.replace(")", "");
   let y = Number(stone.split(",")[1]);
   let x = Number(stone.split(",")[0]);
-  for (let i = 0; i < 2; i++) {
-    for (let j = 0; j < 2; j++) {
+  for (let i = 0; i < stoneHeight; i++) {
+    for (let j = 0; j < stoneHeight; j++) {
       stone = getElementByIdF(x + i, y - j);
       stone.classList.add("stone");
     }
