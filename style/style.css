@@ -21,7 +21,7 @@ body {
   width: 10rem;
   flex-direction: column;
   /* background-color: #ccc; */
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
   height: 100%;
   text-align: center;
@@ -37,12 +37,18 @@ body {
 }
 .grass {
   background-color: rgb(105, 81, 3) !important;
+  /* background-image: url(/photos/stone.png); */
+  /* background-color: pink; */
+  /* width: 5px;
+  height: 3px; */
 }
 .leaves {
   background-color: green;
 }
 .stone {
   background-color: grey;
+  border: 0.1px solid black;
+  border-radius: 3px;
 }
 .flex {
   display: flex;
@@ -63,13 +69,16 @@ body {
 }
 .inventroy-container {
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   height: 30%;
+  /* gap: 0.5rem; */
+  /* margin-top: 0; */
 }
 .mined-image {
   width: 2.5rem;
   height: 2.5em;
   border: 1px black solid;
+  margin-top: 0.5rem;
 }
 .selected {
   box-shadow: 2px 2px 75px 12px rgba(255, 216, 0, 1);
@@ -78,4 +87,10 @@ body {
 }
 .dark-mood {
   background: url(/photos/night-bg.jpeg) no-repeat center center/cover;
+}
+button {
+  margin: 0.2rem;
+}
+button:hover {
+  outline: 0.5px solid black;
 }
