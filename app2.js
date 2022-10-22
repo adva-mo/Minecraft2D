@@ -205,8 +205,10 @@ function gridCellClick(e) {
 }
 
 function toolClick(e) {
+  removeSelectedClass();
   game.currentTool = e.target.id;
   console.log(game.currentTool);
+  e.target.classList.add("selected");
 }
 
 function materialClick(e) {
@@ -215,9 +217,19 @@ function materialClick(e) {
   if (game.inventory[material] <= 0) {
     console.log("you dont have enough");
   } else {
+    removeSelectedClass();
     console.log("plant item selected" + material);
     game.currentTool = null;
     game.readyToPlant = material;
+    e.target.classList.add("selected");
+  }
+}
+
+function removeSelectedClass() {
+  let selectedElement = document.getElementsByClassName("selected");
+  console.log(selectedElement[0]);
+  if (selectedElement[0]) {
+    selectedElement[0].classList.remove("selected");
   }
 }
 
@@ -265,6 +277,8 @@ function plantingValidation(e) {
         e.target.classList.add(`${game.readyToPlant}`);
         game.inventory[game.readyToPlant] -= 1;
         updateInventry(game.readyToPlant);
+      } else if (game.inventory[game.readyToPlant] == 0) {
+        removeSelectedClass();
       } else {
         console.log("not enough in inventory");
       }

@@ -109,11 +109,6 @@ body {
   border: 1px black solid;
   margin-top: 0.5rem;
 }
-.selected {
-  box-shadow: 2px 2px 75px 12px rgba(255, 216, 0, 1);
-  -webkit-box-shadow: 2px 2px 75px 12px rgba(255, 216, 0, 1);
-  -moz-box-shadow: 2px 2px 75px 12px rgba(255, 216, 0, 1);
-}
 .dark-mood {
   background: url(/photos/night-bg.jpeg) no-repeat center center/cover !important;
 }
@@ -132,6 +127,9 @@ button:hover {
   flex-direction: column;
   gap: 0.3rem;
   /* width: 70%; */
+}
+.selected {
+  border-color: red !important;
 }
 
 /* #start-play{
