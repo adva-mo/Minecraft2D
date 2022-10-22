@@ -19,6 +19,7 @@ const game = {
 };
 
 const grid = document.querySelector("#game-board");
+const landingPage = document.querySelector("#landing-page");
 
 const shovel = document.querySelector("#shovel");
 const axe = document.querySelector("#axe");
@@ -291,6 +292,9 @@ function buttonClick(e) {
   }
   if (e.target.id == "random") {
     console.log("random");
+  }
+  if (e.target.id == "play") {
+    landingPage.classList.add("display-none");
   }
 }
 

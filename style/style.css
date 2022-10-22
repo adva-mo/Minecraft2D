@@ -8,7 +8,12 @@ body {
   background-color: #ccc;
   font-size: 14px;
 }
-
+#landing-page {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  background-color: aqua;
+}
 #game-board {
   background-color: rgb(89, 165, 228);
   width: 90%;
@@ -93,4 +98,7 @@ button {
 }
 button:hover {
   outline: 0.5px solid black;
+}
+.display-none {
+  display: none;
 }
