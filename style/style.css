@@ -6,7 +6,7 @@ body {
   /* justify-content: center;
   align-items: center; */
   margin: 0;
-  background-color: #ccc;
+  background-color: #95d7efff;
   font-size: 14px;
   /* position: relative; */
   font-family: "open-sans", "helavetica neue", ariel, sans-serif;
@@ -41,7 +41,8 @@ body {
   display: flex;
 }
 #game-board {
-  background-color: rgb(89, 165, 228);
+  /* background-color: rgb(89, 165, 228); */
+  background: url(/photos/a041c49097c7c5291218e4c773d372ad.jpg) no-repeat center;
   width: 100%;
   height: 100vh;
   display: grid;
@@ -54,6 +55,7 @@ body {
   /* background-color: #ccc; */
   justify-content: space-evenly;
   align-items: center;
+  background-color: #ccc;
 
   text-align: center;
   padding: 0.5rem 0.2rem;
@@ -113,7 +115,7 @@ body {
   -moz-box-shadow: 2px 2px 75px 12px rgba(255, 216, 0, 1);
 }
 .dark-mood {
-  background: url(/photos/night-bg.jpeg) no-repeat center center/cover;
+  background: url(/photos/night-bg.jpeg) no-repeat center center/cover !important;
 }
 button {
   margin: 0.2rem;
