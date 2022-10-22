@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
 body {
   height: 100vh;
   width: 100vw;
@@ -8,6 +9,7 @@ body {
   background-color: #ccc;
   font-size: 14px;
   /* position: relative; */
+  font-family: "open-sans", "helavetica neue", ariel, sans-serif;
 }
 #landing-page {
   width: 100vw;
@@ -62,20 +64,20 @@ body {
   background-color: rgb(89, 45, 29);
 }
 .soil {
-  background-color: rgb(146, 116, 91);
+  /* background-color: #f3c98eff; */
+  background-color: #dead60ff;
 }
 .grass {
-  /* background-image: url(/photos/grass.png); */
   background-color: rgb(72, 111, 56);
   border: rgb(77, 126, 58) solid 0.2px;
-  border-radius: 2px;
+  border-radius: 1px;
 }
 .leaves {
   background-color: rgb(138, 206, 49);
 }
 .stone {
   background-color: grey;
-  border: 0.1px solid black;
+  border: 0.1px solid rgb(139, 138, 138);
   border-radius: 3px;
 }
 .flex {
@@ -97,6 +99,7 @@ body {
   height: 30%;
   /* gap: 0.5rem; */
   /* margin-top: 0; */
+  flex-shrink: 1;
 }
 .mined-image {
   width: 2.5rem;

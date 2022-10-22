@@ -25,6 +25,7 @@
     gap: 0.3rem;
     width: auto;
     padding-left: 0.3rem;
+    flex-direction: column;
   }
   #landing-page {
     width: 100%;
@@ -37,5 +38,10 @@
     flex-direction: column;
     /* height: 100%; */
     /* position: absolute; */
+  }
+  .tool-image {
+    width: 2rem;
+    height: 2.5rem;
+    border: 1px black solid;
   }
 }
