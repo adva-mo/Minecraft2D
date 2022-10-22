@@ -48,7 +48,8 @@
   .settings-container button {
     font-size: x-small;
   }
-  #instructions-box {
+  #instructions-box p,
+  #instructions-box h2 {
     display: none;
   }
   #start-play {

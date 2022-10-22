@@ -16,8 +16,7 @@ body {
   width: 100vw;
   height: 100vh;
   position: absolute;
-  background: url(/photos/background-minecraft.png) no-repeat center
-    center/cover;
+  background: url(/photos/minecraft-bg.jpeg) no-repeat center center/cover;
   /* flex-direction: column;
   justify-content: center;
   align-items: center; */
@@ -29,7 +28,8 @@ body {
   height: 100%;
 }
 #instructions-box {
-  margin-top: 30%;
+  margin-top: 15%;
+  font-size: larger;
 }
 #instructions-box p {
   width: 50%;
@@ -146,3 +146,12 @@ button:hover {
 /* #landing-page button{
 
 } */
+.logo {
+  width: 20rem;
+}
+#start-play {
+  width: 10rem;
+  height: 2rem;
+  font-size: 1rem;
+  background-color: rgb(109, 143, 62);
+}
