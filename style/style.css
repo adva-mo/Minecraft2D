@@ -1,22 +1,46 @@
 body {
   height: 100vh;
   width: 100vw;
-  /* display: flex; */
-  justify-content: center;
-  align-items: center;
+  display: flex;
+  /* justify-content: center;
+  align-items: center; */
   margin: 0;
   background-color: #ccc;
   font-size: 14px;
+  /* position: relative; */
 }
 #landing-page {
   width: 100vw;
   height: 100vh;
   position: absolute;
-  background-color: aqua;
+  background: url(/photos/background-minecraft.png) no-repeat center
+    center/cover;
+  /* flex-direction: column;
+  justify-content: center;
+  align-items: center; */
+  text-align: center;
+  display: none;
+}
+#landind-page-main-box {
+  margin-top: 25%;
+  /* width: 50vw; */
+  height: 100%;
+}
+#instructions-box p {
+  width: 50%;
+  text-align: center;
+  margin-left: 25%;
+  margin-bottom: 10%;
+}
+
+#game-on-page {
+  /* flex-direction: column; */
+  width: 100vw;
+  display: flex;
 }
 #game-board {
   background-color: rgb(89, 165, 228);
-  width: 90%;
+  width: 100%;
   height: 100vh;
   display: grid;
   grid-template-rows: repeat(20, 1fr);
@@ -28,27 +52,26 @@ body {
   /* background-color: #ccc; */
   justify-content: space-evenly;
   align-items: center;
-  height: 100%;
+
   text-align: center;
   padding: 0.5rem 0.2rem;
   flex-shrink: 0;
 }
 
 .trunk {
-  background-color: darkred;
+  background-color: rgb(89, 45, 29);
 }
 .soil {
-  background-color: rgb(195, 156, 41);
+  background-color: rgb(146, 116, 91);
 }
 .grass {
-  background-color: rgb(105, 81, 3) !important;
-  /* background-image: url(/photos/stone.png); */
-  /* background-color: pink; */
-  /* width: 5px;
-  height: 3px; */
+  /* background-image: url(/photos/grass.png); */
+  background-color: rgb(72, 111, 56);
+  border: rgb(77, 126, 58) solid 0.2px;
+  border-radius: 2px;
 }
 .leaves {
-  background-color: green;
+  background-color: rgb(138, 206, 49);
 }
 .stone {
   background-color: grey;
@@ -58,11 +81,7 @@ body {
 .flex {
   display: flex;
 }
-/* .item-box {
-  border: 1px black solid;
-  margin: 0.2rem;
-  padding: 0.2rem;
-} */
+
 .tool-image {
   width: 2.5rem;
   height: 5rem;
@@ -96,6 +115,7 @@ body {
 button {
   margin: 0.2rem;
   font-size: 0.8rem;
+  cursor: pointer;
 }
 button:hover {
   outline: 0.5px solid black;
@@ -103,3 +123,12 @@ button:hover {
 .display-none {
   display: none;
 }
+.buttons-container {
+  flex-direction: column;
+  gap: 0.3rem;
+  /* width: 70%; */
+}
+
+/* #start-play{
+
+} */

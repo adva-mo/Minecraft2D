@@ -92,8 +92,8 @@ const drawGrass = (soilY) => {
 };
 
 function drawTreeTrunck(soilY) {
-  trunkLen = randomNumAtoB(2, 4);
-  let x = randomNumAtoB(6, 24);
+  trunkLen = randomNumAtoB(3, 4);
+  let x = randomNumAtoB(6, 23);
   let treeTrunk = getElementByIdF(x, soilY - 2);
   if (treeTrunk) {
     treeTrunk.classList.add("trunk");
@@ -107,17 +107,14 @@ function drawTreeTrunck(soilY) {
 }
 function drawTreeLeaves(trunkLen) {
   let tree = document.getElementsByClassName(`trunk`)[0];
-  //   console.log(tree);
-  let position = tree.id; // (0,13)
+  let position = tree.id;
   position = position.replace("(", "");
   position = position.replace(")", "");
   let y = Number(position.split(",")[1]);
   let x = Number(position.split(",")[0]);
-
   counter = 0;
   let greenLength = trunkLen * 2 + 1;
   y--;
-  // console.log(x, y, trunkLen, tree);
   for (let i = 0; i <= trunkLen; i++) {
     for (let j = 0; j < greenLength; j++) {
       tree = getElementByIdF(x - trunkLen + i + j, y - counter);
@@ -234,7 +231,7 @@ function buttonClick(e) {
   if (e.target.id == "random") {
     newRandomWorld();
   }
-  if (e.target.id == "play" || e.target.id == "instructions") {
+  if (e.target.id == "start-play" || e.target.id == "instructions") {
     landingPage.classList.toggle("display-none");
   }
 }
@@ -333,6 +330,7 @@ function generateRandomWorld() {
   var trunkLen;
   var treeXposition;
   var stringPosition;
+  var grassPosition;
   generateDivIDs();
   soilY = drawSoil();
   drawGrass(soilY);
@@ -340,6 +338,8 @@ function generateRandomWorld() {
   treeXposition = drawTreeLeaves(trunkLen);
   stringPosition = setStonePosition(treeXposition, soilY);
   drawStones(stringPosition);
+  grassPosition = setGrassPosition(treeXposition, soilY);
+  drawBigGrass(grassPosition);
 }
 
 game.gameState = scanWorldToGameState();
@@ -351,5 +351,38 @@ addClickEvents();
 // --------temporary functions
 *
 */
+function setGrassPosition(treeXposition, soilY) {
+  let x, y;
+  console.log(treeXposition);
+  if (treeXposition > 15) {
+    x = randomNumAtoB(17, 26);
+    y = soilY - 2;
+  } else {
+    x = randomNumAtoB(2, 12);
+    y = soilY - 2;
+  }
+  if (x == treeXposition || x == treeXposition - 1) {
+    setGrassPosition(treeXposition, soilY);
+  } else {
+    return `(${x},${y})`;
+  }
+}
+
+function drawBigGrass(stringPosition) {
+  let stone = document.getElementById(stringPosition);
+  let stoneHeight = randomNumAtoB(2, 2);
+  stone.classList.add("grass");
+  stone = stone.id;
+  stone = stone.replace("(", "");
+  stone = stone.replace(")", "");
+  let y = Number(stone.split(",")[1]);
+  let x = Number(stone.split(",")[0]);
+  for (let i = 0; i < stoneHeight; i++) {
+    for (let j = 0; j < stoneHeight; j++) {
+      stone = getElementByIdF(x + i, y - j);
+      stone.classList.add("grass");
+    }
+  }
+}
 
 function getNumId(stringId) {}

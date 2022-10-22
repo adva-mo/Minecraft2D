@@ -10,59 +10,86 @@
     <link rel="stylesheet" href="/style/style.css" />
     <link rel="stylesheet" href="/style/media.css" />
   </head>
-  <body class="flex">
+  <body>
     <div id="landing-page">
-      <button id="play">start play</button>
-    </div>
-    <div id="game-dashboard" class="game-dashboard flex">
-      <div class="tools-container flex">
-        <img class="tool-image" id="shovel" src="/photos/shovel.jpeg" alt="" />
-        <img class="tool-image" id="axe" src="/photos/axe.jpeg" alt="" />
-        <img
-          class="tool-image"
-          id="pickaxe"
-          src="/photos/pickaxe.jpeg"
-          alt=""
-        />
-      </div>
-      <div class="inventroy-container flex">
-        <img
-          id="leaves-pic"
-          class="mined-image"
-          src="/photos/leaves.png"
-          alt=""
-        />
-        <span id="leaves-count">0</span>
-        <img
-          id="trunk-pic"
-          class="mined-image"
-          src="/photos/wood.png_wh300.png"
-          alt=""
-        />
-        <span id="trunk-count">0</span>
-        <img
-          id="stone-pic"
-          class="mined-image"
-          src="/photos/stone.png"
-          alt=""
-        />
-        <span id="stone-count">0</span>
-        <img id="soil-pic" class="mined-image" src="/photos/soil.png" alt="" />
-        <span id="soil-count">soil 0</span>
-        <img id="grass-pic" class="mined-image" src="/photos/soil.png" alt="" />
-        <span id="grass-count">gra 0</span>
-      </div>
-      <div class="settings-container">
-        <div class="buttons-container">
-          <button id="restart">Restart</button>
-          <button id="darkMood">Dark mood</button>
-          <button id="random">Random world</button>
-          <button id="instructions">Instructions</button>
+      <div id="landind-page-main-box">
+        <div id="instructions-box">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Accusantium, temporibus voluptate reprehenderit, nihil tenetur sit
+            et quos in ex quas possimus eos est eum aliquam maiores cum quod.
+            Praesentium, incidunt?
+          </p>
         </div>
-        <div class="theme-container"></div>
+        <button id="start-play" class="btn">start play</button>
       </div>
     </div>
-    <div id="game-board"></div>
+    <div id="game-on-page">
+      <div id="game-dashboard" class="game-dashboard flex">
+        <div class="tools-container flex">
+          <img
+            class="tool-image"
+            id="shovel"
+            src="/photos/shovel.jpeg"
+            alt=""
+          />
+          <img class="tool-image" id="axe" src="/photos/axe.jpeg" alt="" />
+          <img
+            class="tool-image"
+            id="pickaxe"
+            src="/photos/pickaxe.jpeg"
+            alt=""
+          />
+        </div>
+        <div class="inventroy-container flex">
+          <img
+            id="leaves-pic"
+            class="mined-image"
+            src="/photos/leaves.png"
+            alt=""
+          />
+          <span id="leaves-count">0</span>
+          <img
+            id="trunk-pic"
+            class="mined-image"
+            src="/photos/wood.png_wh300.png"
+            alt=""
+          />
+          <span id="trunk-count">0</span>
+          <img
+            id="stone-pic"
+            class="mined-image"
+            src="/photos/stone.png"
+            alt=""
+          />
+          <span id="stone-count">0</span>
+          <img
+            id="soil-pic"
+            class="mined-image"
+            src="/photos/soil.png"
+            alt=""
+          />
+          <span id="soil-count">soil 0</span>
+          <img
+            id="grass-pic"
+            class="mined-image"
+            src="/photos/grass.png"
+            alt=""
+          />
+          <span id="grass-count">gra 0</span>
+        </div>
+        <div class="settings-container">
+          <div class="buttons-container flex">
+            <button id="restart">Restart</button>
+            <button id="darkMood">Dark mood</button>
+            <button id="random">Random world</button>
+            <button id="instructions">Instructions</button>
+          </div>
+          <div class="theme-container"></div>
+        </div>
+      </div>
+      <div id="game-board"></div>
+    </div>
   </body>
   <!-- <script src="/app.js"></script> -->
   <script src="/app2.js"></script>

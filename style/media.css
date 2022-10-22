@@ -1,4 +1,4 @@
-@media (max-width: 600px) {
+@media (max-width: 450px) {
   body {
     flex-direction: column;
   }
@@ -16,11 +16,26 @@
   }
   .inventroy-container {
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
   }
   .tools-container {
     /* justify-content: space-between; */
     gap: 0.3rem;
     width: auto;
     padding-left: 0.3rem;
+  }
+  #landing-page {
+    width: 100%;
+    height: 100%;
+    /* background-image:; */
+  }
+  #game-on-page {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* height: 100%; */
+    /* position: absolute; */
   }
 }
