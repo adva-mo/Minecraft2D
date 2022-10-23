@@ -17,7 +17,7 @@ const game = {
     pickaxe: ["stone"],
   },
 };
-const gridcells = null;
+
 const grid = document.querySelector("#game-board");
 const landingPage = document.querySelector("#landing-page");
 
@@ -36,11 +36,8 @@ const miningMaterial = [leave, trunk, stone, soil, grass];
 const gameButtons = document.querySelectorAll("button");
 const countBoxes = document.querySelectorAll("span");
 
-/*
-*
-// -------- functions - tested!
-*
-*/
+// -------- game functions --------//
+
 function sliceArrIntoChunks(arr, chunkSize) {
   const res = [];
   for (let i = 0; i < arr.length; i += chunkSize) {
@@ -156,7 +153,6 @@ function drawStones(stringPosition) {
 
 function setGrassPosition(treeXposition, soilY) {
   let x, y;
-  console.log(treeXposition);
   if (treeXposition > 15) {
     x = randomNumAtoB(17, 26);
     y = soilY - 2;
@@ -177,7 +173,6 @@ function drawBigGrass(stringPosition) {
   if (!stone) {
     return;
   }
-  stone.classList.add("grass");
   stone = stone.id;
   stone = stone.replace("(", "");
   stone = stone.replace(")", "");
@@ -192,18 +187,8 @@ function drawBigGrass(stringPosition) {
 }
 
 function scanWorldToGameState() {
-  let gameState = [];
-  const gridCells = grid.querySelectorAll("div");
-  let allCells = [...gridCells];
-  allCells = sliceArrIntoChunks(allCells, 30);
-  for (let row of allCells) {
-    let newRow = [];
-    for (let div of row) {
-      newRow.push(div);
-    }
-    gameState.push(newRow);
-  }
-  return gameState;
+  let gridToRestart = grid.cloneNode(true);
+  game.gameState = gridToRestart;
 }
 
 function addClickEvents() {
@@ -224,10 +209,7 @@ function addClickEvents() {
 
 function gridCellClick(e) {
   const ElementClass = e.target.getAttribute("class");
-  //   console.log();
   if (game.currentTool) {
-    console.log(`elemnet class: ${ElementClass}`);
-
     if (ElementClass) {
       miningValidation(e, ElementClass);
     } else {
@@ -243,7 +225,6 @@ function gridCellClick(e) {
 function toolClick(e) {
   removeSelectedClass();
   game.currentTool = e.target.id;
-  console.log(game.currentTool);
   e.target.classList.add("selected");
 }
 
@@ -254,7 +235,6 @@ function materialClick(e) {
     console.log("you dont have enough");
   } else {
     removeSelectedClass();
-    console.log("plant item selected" + material);
     game.currentTool = null;
     game.readyToPlant = material;
     e.target.classList.add("selected");
@@ -263,7 +243,7 @@ function materialClick(e) {
 
 function removeSelectedClass() {
   let selectedElement = document.getElementsByClassName("selected");
-  console.log(selectedElement[0]);
+  // console.log(selectedElement[0]);
   if (selectedElement[0]) {
     selectedElement[0].classList.remove("selected");
   }
@@ -271,7 +251,7 @@ function removeSelectedClass() {
 
 function buttonClick(e) {
   if (e.target.id == "restart") {
-    newRandomWorld();
+    restartWorld();
   }
   if (e.target.id == "darkMood") {
     setDarkMood(game.darkMood);
@@ -331,7 +311,6 @@ function getdivBelowClass(plantLocation) {
   let x = Number(plantLocation.split(",")[0]);
   DivBelowClass = getElementByIdF(x, y + 1);
   let plantingLoctionClass = DivBelowClass.getAttribute("class");
-  console.log("div below class", plantingLoctionClass);
   return plantingLoctionClass;
 }
 
@@ -341,16 +320,16 @@ function setDarkMood() {
 
 function newRandomWorld() {
   resetGameSettings();
-  var child = grid.lastElementChild;
-  while (child) {
-    grid.removeChild(child);
-    child = grid.lastElementChild;
-  }
+  removeGridCells();
   generateRandomWorld(grid);
   const gridCells = grid.querySelectorAll("div");
   gridCells.forEach((cell) => {
     cell.addEventListener("click", gridCellClick);
   });
+}
+
+function removeGridCells() {
+  grid.innerHTML = "";
 }
 
 function resetGameSettings() {
@@ -367,13 +346,13 @@ function resetGameSettings() {
   game.readyToPlant = null;
 }
 
-/*
-*
-// --------game starts here
-*
-*/
+function restartWorld() {
+  resetGameSettings();
+  grid.innerHTML = game.gameState.innerHTML;
+  addClickEvents();
+}
 
-generateRandomWorld();
+// --------game starts here-------
 
 function generateRandomWorld() {
   var soilY;
@@ -390,16 +369,7 @@ function generateRandomWorld() {
   drawStones(stringPosition);
   grassPosition = setGrassPosition(treeXposition, soilY);
   drawBigGrass(grassPosition);
+  scanWorldToGameState();
 }
-
-game.gameState = scanWorldToGameState();
-
+generateRandomWorld();
 addClickEvents();
-
-/*
-*
-// --------temporary functions
-*
-*/
-
-function getNumId(stringId) {}
